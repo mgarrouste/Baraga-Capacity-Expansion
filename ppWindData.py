@@ -51,6 +51,17 @@ def plotWindDistribution(folder):
     plt.savefig('./wind_speeds_distribution.png')
     plt.close()
 
+def createCFData(folder):
+    files  = [os.path.join(folder,f) for f in os.listdir(folder) if os.path.isfile(os.path.join(folder,f))]
+    times = ['t'+str(k+1) for k in range(8761)]
+    header = ['']+['w'+str(k) for k in range(1,9)]
+    print(times)
+    print(header)
+    for f in files: 
+        df = pd.read_csv(f, skiprows=1)
+        windSpeeds =list(df['wind speed at 100m (m/s)'])
+    
+
 
 
 if __name__ == "__main__":
