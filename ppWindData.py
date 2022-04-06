@@ -68,7 +68,7 @@ def windspeedToCF(windSpeed, powerCurve):
 def createCFData(folder):
     files  = [os.path.join(folder,f) for f in os.listdir(folder) if os.path.isfile(os.path.join(folder,f))]
     times = ['t'+str(k+1) for k in range(8760)]
-    header = ['']+['w'+str(k) for k in range(1,9)]
+    windTurbines = ['w'+str(k) for k in range(1,9)]
     dico = {}
     count = 1
     for f in files: 
@@ -79,10 +79,10 @@ def createCFData(folder):
         count +=1
     with open('windCF.csv', mode='w', newline='') as CFfile:
         writer = csv.writer(CFfile, delimiter=',', quotechar = '"', quoting=csv.QUOTE_MINIMAL)
-        writer.writerow(header)
-        for k in range(8760):
-            row = [times[k]]+[dico['w'+str(loc)][k] for loc in range(1,9)]
-            writer.writerow(row)
+        for wt in windTurbines:
+            for k in range(8760):
+                row = [times[k], wt, dico[wt][k]]
+                writer.writerow(row)
 
 
 

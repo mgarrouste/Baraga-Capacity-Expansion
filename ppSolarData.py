@@ -24,7 +24,7 @@ def writeCleanCSV(time, cf):
     with open('solarCFBaraga.csv', mode='w', newline='') as file: 
         writer = csv.writer(file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         for t in range(1,8761):
-            writer.writerow(['t'+str(t), cf[t-1]])
+            writer.writerow(['s','t'+str(t), cf[t-1]])
 
 
 def plotSolarCF(time, cf): 
